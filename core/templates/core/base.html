@@ -19,7 +19,11 @@
         <a class="p-2 text-dark" href="{% url 'core:produtos' %}">Produtos</a>
         <a class="p-2 text-dark" href="{% url 'core:pedidos' %}">Pedidos</a>
       </nav>
+      {% if user.is_authenticated %}
+      <a class="btn btn-outline-danger" href="{% url 'core:logout' %}">Logout</a>
+      {% else %}
       <a class="btn btn-outline-primary" href="{% url 'core:login' %}">Login</a>
+      {% endif %}
     </div>
 
     {% block content %}

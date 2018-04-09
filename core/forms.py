@@ -16,3 +16,7 @@ class ClienteForm(forms.ModelForm):
         cliente         = Cliente()
         cliente.cliente = self.cleaned_data['cliente']
         cliente.cpf     = self.cleaned_data['cpf']
+
+
+class UserCreationForm():
+    pass
