@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12 col-md-6">
                 <label for="produtoSelect" class="col-sm-2 col-form-label pl-0">Produto: </label>
                 <select class="form-control form-control-sm" id="produtoSelect">
                 {% for produto in produtos %}
@@ -18,6 +18,15 @@
                 {% endfor %}
                 </select>
             </div>
+            <div class="col-6 col-md-3">
+                <label for="id_product-0-quantity" class="col-sm-2 col-form-label pl-0">Quantidade: </label>
+                <input class=" form-control form-control-sm" id="id_product-0-quantity" min="1" name="id_product-0-quantity" type="number">
+            </div>
+            <div class="col-6 col-md-3 mb-5">
+                <label for="id_product-0-price_sale" class="col-sm-2 col-form-label pl-0">Preço: </label>
+                <input class=" form-control form-control-sm" id="id_product-0-price_sale" name="product-0-price_sale" step="0.1" type="number" value="0" min="0.01">
+            </div>
+            <a href="#" class="btn btn-sm btn-info ml-3 mt-0">Add item</a>
         </div>
     </div>
 
