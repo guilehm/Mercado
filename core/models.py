@@ -20,6 +20,14 @@ class Produto(models.Model):
 
 class Pedido(models.Model):
     cliente     = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    produto     = models.ForeignKey(Produto, on_delete=models.CASCADE)
     criado      = models.DateField('Criado em', auto_now_add=True)
     modificado  = models.DateField('Modificado em', auto_now_add=False, auto_now=True)
+
+class DetalhePedido(models.Model):
+    pedido      = models.ForeignKey(Pedido)
+    produto     = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade  = models.PositiveSmallIntegerField('quantidade')
+    preco       = models.DecimalField('Preço', decimal_places=2, max_digits=7)
+
+    def __str__(self):
+        return str(self.pedido)

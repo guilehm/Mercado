@@ -9,10 +9,10 @@
     </div>
 
     <div class="container">
-        <div class="row">
+        <div class="row" id="order">
             <div class="col-12 col-md-6">
-                <label for="produtoSelect" class="col-sm-2 col-form-label pl-0">Produto: </label>
-                <select class="form-control form-control-sm" id="produtoSelect">
+                <label for="id_product-0-product" class="col-sm-2 col-form-label pl-0">Produto: </label>
+                <select class="form-control form-control-sm" id="id_product-0-product">
                 {% for produto in produtos %}
                     <option>{{ produto }}</option>
                 {% endfor %}
@@ -24,10 +24,26 @@
             </div>
             <div class="col-6 col-md-3 mb-5">
                 <label for="id_product-0-price_sale" class="col-sm-2 col-form-label pl-0">Preço: </label>
-                <input class=" form-control form-control-sm" id="id_product-0-price_sale" name="product-0-price_sale" step="0.1" type="number" value="0" min="0.01">
+                <input class=" form-control form-control-sm" id="id_product-0-price" name="product-0-price_sale" step="0.1" type="number" value="0" min="0.01">
             </div>
-            <a href="#" class="btn btn-sm btn-info ml-3 mt-0">Add item</a>
         </div>
+        <a href="#" class="btn btn-sm btn-info mb-4" id="add-item">Add item</a>
     </div>
 
+
 {% endblock %}
+
+    {% block script %}
+    <!--<script>-->
+        <!--var addButton = document.querySelector('#add-item');-->
+		<!--addButton.addEventListener('click', function(event) {-->
+			<!--event.preventDefault(); // Previne atualizar página-->
+			<!---->
+			<!--var formProduto 	= document.querySelector('#id_product-0-product')-->
+			<!--var formQuantidade 	= document.querySelector('#id_product-0-quantity')-->
+			<!--var formPreco 		= document.querySelector('#id_product-0-price')-->
+			<!---->
+			<!--alert('função chamada')-->
+		<!--})-->
+    <!--</script>-->
+    {% endblock script %}
