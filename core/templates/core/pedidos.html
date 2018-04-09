@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Pedidos</h1>
+      <p class="lead">Faça aqui o seu pedido.</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <label for="produtoSelect" class="col-sm-2 col-form-label pl-0">Produto: </label>
+                <select class="form-control form-control-sm" id="produtoSelect">
+                {% for produto in produtos %}
+                    <option>{{ produto }}</option>
+                {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
