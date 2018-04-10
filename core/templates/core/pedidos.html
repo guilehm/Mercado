@@ -23,8 +23,8 @@
                 <input class=" form-control form-control-sm" id="id_product-0-quantity" min="1" name="id_product-0-quantity" type="number">
             </div>
             <div class="col-6 col-md-3 mb-5">
-                <label for="id_product-0-price_sale" class="col-sm-2 col-form-label pl-0">Preço: </label>
-                <input class=" form-control form-control-sm" id="id_product-0-price" name="product-0-price_sale" step="0.1" type="number" value="0" min="0.01">
+                <label for="id_product-0-price" class="col-sm-2 col-form-label pl-0">Preço: </label>
+                <input class=" form-control form-control-sm" id="id_product-0-price" name="product-0-price" step="0.1" type="number" value="0" min="0.01">
             </div>
         </div>
         <a href="#" class="btn btn-sm btn-info mb-4" id="add-item">Add item</a>
@@ -34,16 +34,38 @@
 {% endblock %}
 
     {% block script %}
-    <!--<script>-->
-        <!--var addButton = document.querySelector('#add-item');-->
-		<!--addButton.addEventListener('click', function(event) {-->
-			<!--event.preventDefault(); // Previne atualizar página-->
-			<!---->
-			<!--var formProduto 	= document.querySelector('#id_product-0-product')-->
-			<!--var formQuantidade 	= document.querySelector('#id_product-0-quantity')-->
-			<!--var formPreco 		= document.querySelector('#id_product-0-price')-->
-			<!---->
-			<!--alert('função chamada')-->
-		<!--})-->
-    <!--</script>-->
+    <script>
+        var addButton = document.querySelector('#add-item');
+		addButton.addEventListener('click', function(event) {
+			event.preventDefault(); // Previne atualizar página
+
+			var formProduto 	= document.querySelector('#id_product-0-product')
+			var formQuantidade 	= document.querySelector('#id_product-0-quantity')
+			var formPreco 		= document.querySelector('#id_product-0-price')
+
+			
+		})
+    </script>
+    
+    <script>
+		<div class="row">
+            <div class="col-12 col-md-6">
+                <label for="id_product-__prefix__-product" class="col-sm-2 col-form-label pl-0">Produto: </label>
+                <select class="form-control form-control-sm" id="id_product-__prefix__-product">
+                {% for produto in produtos %}
+                    <option>{{ produto }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="col-6 col-md-3">
+                <label for="id_product-__prefix__-quantity" class="col-sm-2 col-form-label pl-0">Quantidade: </label>
+                <input class=" form-control form-control-sm" id="id_product-__prefix__-quantity" min="1" name="id_product-__prefix__-quantity" type="number">
+            </div>
+            <div class="col-6 col-md-3 mb-5">
+                <label for="id_product-__prefix__-price" class="col-sm-2 col-form-label pl-0">Preço: </label>
+                <input class=" form-control form-control-sm" id="id_product-__prefix__-price" name="product-__prefix__-price" step="0.1" type="number" value="0" min="0.01">
+            </div>
+        </div>
+    </div>
+	</script>
     {% endblock script %}
