@@ -4,9 +4,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
 {% endblock css %}
 
-{% block js %}
+{% block select %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-{% endblock js %}
+{% endblock select %}
 
 
 {% block content %}
@@ -51,29 +51,29 @@
         </div>
     </div>
 
-
 {% endblock %}
 
     {% block script %}
     <script>
-      $(document).ready(function () {
-          $("#add-item").click(function (ev) {
-          ev.preventDefault();
-          var count = $('#order').children().length;
-          var tmplMarkup = $("#item-order").html();
-          var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
-          $("div#order").append(compiledTmpl);
-          // update form count
-          $('#id_product-TOTAL_FORMS').attr('value', count + 1);
-          // some animate to scroll to view our new form
-          $('html, body').animate({
-            scrollTop: $("#add-item").position().top - 200
-          }, 800);
-          {}
-          $('#id_product-' + (count) + '-product').select2();
-        });
-        {}
-        $('select').select2();
+		$(document).ready(function () {
+			$("#add-item").click(function (ev) {
+				ev.preventDefault();
+				var count = $('#order').children().length;
+				var tmplMarkup = $("#item-order").html();
+				var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+				$("div#order").append(compiledTmpl);
+				// update form count
+				$('#id_produto-TOTAL_FORMS').attr('value', count + 1);
+				// some animate to scroll to view our new form    nao vi.. vc ja corrigiu? não... é na linha 66 o erro, naão é?
+				$('#id_produto-' + (count) + '-produto').select2();
+
+				$('html, body').animate({
+					scrollTop: $("#add-item").position().top - 200
+				}, 800);
+			  
+        	});
+			// {}
+			$('select').select2();
       });
     </script>
     
