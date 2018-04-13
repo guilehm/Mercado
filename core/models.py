@@ -25,7 +25,9 @@ class Pedido(models.Model):
     modificado  = models.DateField('Modificado em', auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
+
+
 class DetalhePedido(models.Model):
     pedido      = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     produto     = models.ForeignKey(Produto, on_delete=models.CASCADE)

@@ -1,5 +1,13 @@
 {% extends 'core/base.html' %}
 
+{% block css %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+{% endblock css %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+{% endblock js %}
+
 
 {% block content %}
 
@@ -8,27 +16,6 @@
       <p class="lead">Faça aqui o seu pedido.</p>
     </div>
 
-    <div class="container">
-        <div class="row" id="order">
-            <div class="col-12 col-md-6">
-                <label for="id_product-0-product" class="col-sm-2 col-form-label pl-0">Produto: </label>
-                <select class="form-control form-control-sm" id="id_product-0-product">
-                {% for produto in produtos %}
-                    <option>{{ produto }}</option>
-                {% endfor %}
-                </select>
-            </div>
-            <div class="col-6 col-md-3">
-                <label for="id_product-0-quantity" class="col-sm-2 col-form-label pl-0">Quantidade: </label>
-                <input class=" form-control form-control-sm" id="id_product-0-quantity" min="1" name="id_product-0-quantity" type="number">
-            </div>
-            <div class="col-6 col-md-3 mb-5">
-                <label for="id_product-0-price" class="col-sm-2 col-form-label pl-0">Preço: </label>
-                <input class=" form-control form-control-sm" id="id_product-0-price" name="product-0-price" step="0.1" type="number" value="0" min="0.01">
-            </div>
-        </div>
-        <a href="#" class="btn btn-sm btn-info mb-4" id="add-item">Add item</a>
-    </div>
 
     <div class="container">
         <div class="row">
@@ -44,25 +31,16 @@
                   </div>
               </div>
               <h3 class="lead">Produtos</h3>
-              <div id="order1" class="form-inline">
+              <div id="order" class="form-inline">
                   {% for item_order_form in formset %}
                   <div id="item-{{ forloop.counter0 }}" class="form-group">
                       {{ item_order_form }}
                   </div>
                   {% endfor %}
               </div>
-
-              <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
-                {{ formset.empty_form }}
-              </div>
-
-              <!--<a class="btn btn-info" id="add-item1"><i class="fa fa-plus"></i>Add Item</a>-->
+              <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
 
               <div class="form-inline buttons">
-                  <!--<a href="{% url 'core:index' %}" class="btn btn-danger pull-right">-->
-                      <!--<i class="fa fa-times"></i>-->
-                      <!--Cancelar-->
-                  <!--</a>-->
                   <button class="btn btn-primary pull-right" value="Save">
                       <i class="fa fa-floppy-o"></i>
                       Salvar
@@ -78,37 +56,32 @@
 
     {% block script %}
     <script>
-        var addButton = document.querySelector('#add-item');
-		addButton.addEventListener('click', function(event) {
-			event.preventDefault(); // Previne atualizar página
 
-			var formProduto 	= document.querySelector('#id_product-0-product')
-			var formQuantidade 	= document.querySelector('#id_product-0-quantity')
-			var formPreco 		= document.querySelector('#id_product-0-price')
-
-			
-		})
+      $(document).ready(function () {
+        $("#add-item").click(function (ev) {
+		  alert('Função chamada')	
+          ev.preventDefault();
+          var count = $('#order').children().length;
+          var tmplMarkup = $("#item-order").html();
+          var compiledTmpl = tmplMarkup.replace(/__prefix__/g, count);
+          $("div#order").append(compiledTmpl);
+          // update form count
+          $('#id_product-TOTAL_FORMS').attr('value', count + 1);
+          // some animate to scroll to view our new form
+          $('html, body').animate({
+            scrollTop: $("#add-item").position().top - 200
+          }, 800);
+          {}
+          $('#id_product-' + (count) + '-product').select2();
+        });
+        {}
+        $('select').select2();
+      });
     </script>
     
-    <script>
-		<div class="row">
-            <div class="col-12 col-md-6">
-                <label for="id_product-__prefix__-product" class="col-sm-2 col-form-label pl-0">Produto: </label>
-                <select class="form-control form-control-sm" id="id_product-__prefix__-product">
-                {% for produto in produtos %}
-                    <option>{{ produto }}</option>
-                {% endfor %}
-                </select>
-            </div>
-            <div class="col-6 col-md-3">
-                <label for="id_product-__prefix__-quantity" class="col-sm-2 col-form-label pl-0">Quantidade: </label>
-                <input class=" form-control form-control-sm" id="id_product-__prefix__-quantity" min="1" name="id_product-__prefix__-quantity" type="number">
-            </div>
-            <div class="col-6 col-md-3 mb-5">
-                <label for="id_product-__prefix__-price" class="col-sm-2 col-form-label pl-0">Preço: </label>
-                <input class=" form-control form-control-sm" id="id_product-__prefix__-price" name="product-__prefix__-price" step="0.1" type="number" value="0" min="0.01">
-            </div>
-        </div>
-    </div>
+    <script type="text/html" id="item-order">
+      <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
+        {{ formset.empty_form }}
+      </div>
 	</script>
     {% endblock script %}
