@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 class Cliente(models.Model):
@@ -12,7 +13,7 @@ class Cliente(models.Model):
 class Produto(models.Model):
     produto     = models.CharField('Nome Produto', max_length=20)
     descricao   = models.TextField('Descrição', max_length=500)
-    preco       = models.DecimalField('Preço', decimal_places=2, max_digits=7)
+    preco       = models.DecimalField('Preço', decimal_places=2, max_digits=7, validators=[MinValueValidator(0.01)])
 
     def __str__(self):
         return self.produto
@@ -23,7 +24,8 @@ class Pedido(models.Model):
     criado      = models.DateField('Criado em', auto_now_add=True)
     modificado  = models.DateField('Modificado em', auto_now_add=False, auto_now=True)
 
-
+    def __str__(self):
+        return self.id
 class DetalhePedido(models.Model):
     pedido      = models.ForeignKey(Pedido, on_delete=models.CASCADE)
     produto     = models.ForeignKey(Produto, on_delete=models.CASCADE)

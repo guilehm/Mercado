@@ -1,16 +1,16 @@
 from django import forms
-from .models import Cliente
+from .models import Pedido
+from .models import DetalhePedido
 
-class ClienteForm(forms.ModelForm):
+class PedidoForm(forms.ModelForm):
+
     class Meta:
-        model = Cliente
-        fields = {
-            'cliente',
-            'cpf',
-        }
+        model = Pedido
+        fields = '__all__'
 
-    def save(self, commit=True):
-        cliente         = Cliente()
-        cliente.cliente = self.cleaned_data['cliente']
-        cliente.cpf     = self.cleaned_data['cpf']
 
+class DetalhePedidoForm(forms.ModelForm):
+
+    class Meta:
+        model = DetalhePedido
+        fields = '__all__'

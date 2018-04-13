@@ -7,8 +7,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.shortcuts import resolve_url
+from django.forms.models import inlineformset_factory
 from .models import Produto
 from .models import Pedido
+from .models import DetalhePedido
+from .forms import PedidoForm
+from .forms import DetalhePedidoForm
 
 
 # Create your views here.
@@ -27,9 +32,33 @@ def produtos(request):
 def pedidos(request):
     produtos = Produto.objects.all()
     pedidos = Pedido.objects.all()
+
+    pedido_forms = Pedido()
+    item_pedido_formset = inlineformset_factory(
+        Pedido, DetalhePedido, form=DetalhePedidoForm,extra=0, can_delete=False, min_num=1, validate_min=True
+    )
+
+    if request.method == 'POST':
+        forms = PedidoForm(request.POST, request.FILES,
+                           instance=pedido_forms, prefix='main')
+        formset = item_pedido_formset(
+            request.POST, request.FILES, instance=pedido_forms, prefix='produto'
+        )
+
+        if forms.is_valid() and formset.is_valid():
+            forms = forms.save()
+            formset.save()
+            return HttpResponseRedirect(resolve_url('core:pedidos', forms.pk))
+
+    else:
+        forms = PedidoForm(instance=pedido_forms, prefix='main')
+        formset = item_pedido_formset(instance=pedido_forms, prefix='produto')
+
     context = {
         'pedidos' : pedidos,
         'produtos': produtos,
+        'forms' : forms,
+        'formset' : formset,
     }
     return render(request, 'core/pedidos.html', context)
 
