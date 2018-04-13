@@ -56,10 +56,8 @@
 
     {% block script %}
     <script>
-
       $(document).ready(function () {
-        $("#add-item").click(function (ev) {
-		  alert('Função chamada')	
+          $("#add-item").click(function (ev) {
           ev.preventDefault();
           var count = $('#order').children().length;
           var tmplMarkup = $("#item-order").html();
