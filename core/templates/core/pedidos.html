@@ -16,66 +16,64 @@
       <p class="lead">Faça aqui o seu pedido.</p>
     </div>
 
-    <div class="container">
-                      {{ forms }}
-                      {{ formset.management_form }}
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Preço</th>
-            <th>Quantidade</th>
-          </tr>
-        </thead>
-        <tbody id="order">
-          {% for item_order_form in formset %}
-          <tr>
-            <td>{{ item_order_form.produto }}</td>
-            <td>{{ item_order_form.quantidade }}</td>
-            <td>{{ item_order_form.preco }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-        <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
-    </div>
-
-
     <!--<div class="container">-->
-        <!--<div class="row">-->
-
-          <!--<form action="" method="POST">-->
-              <!--{% csrf_token %}-->
-
-
-              <!--<div class="row">-->
-                  <!--<div class="col-xs-8 col-md-5">-->
                       <!--{{ forms }}-->
                       <!--{{ formset.management_form }}-->
-                  <!--</div>-->
-              <!--</div>-->
-              <!--<h3 class="lead">Produtos</h3>-->
-              <!--<div id="order" class="form-inline">-->
-                  <!--{% for item_order_form in formset %}-->
-                  <!--<div id="item-{{ forloop.counter0 }}" class="form-group">-->
-                      <!--<span class="mx-2">{{ item_order_form.produto }}</span>-->
-                      <!--<span class="mx-2">{{ item_order_form.quantidade }}</span>-->
-                      <!--<span class="mx-2">{{ item_order_form.preco }}</span>-->
-                  <!--</div>-->
-                  <!--{% endfor %}-->
-              <!--</div>-->
-              <!--<a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>-->
-
-              <!--<div class="form-inline buttons">-->
-                  <!--<button class="btn btn-primary pull-right" value="Save">-->
-                      <!--<i class="fa fa-floppy-o"></i>-->
-                      <!--Salvar-->
-                  <!--</button>-->
-              <!--</div>-->
-
-          <!--</form>-->
-        <!--</div>-->
+      <!--<table class="table table-hover">-->
+        <!--<thead>-->
+          <!--<tr>-->
+            <!--<th>Produto</th>-->
+            <!--<th>Preço</th>-->
+            <!--<th>Quantidade</th>-->
+          <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody id="order">-->
+          <!--{% for item_order_form in formset %}-->
+          <!--<tr>-->
+            <!--<td>{{ item_order_form.produto }}</td>-->
+            <!--<td>{{ item_order_form.quantidade }}</td>-->
+            <!--<td>{{ item_order_form.preco }}</td>-->
+          <!--</tr>-->
+          <!--{% endfor %}-->
+        <!--</tbody>-->
+      <!--</table>-->
+        <!--<a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>-->
     <!--</div>-->
+
+
+    <div class="container">
+        <div class="row">
+
+          <form action="" method="POST">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-xs-8 col-md-5">
+                      {{ forms }}
+                      {{ formset.management_form }}
+                  </div>
+              </div>
+              <h3 class="lead">Produtos</h3>
+              <div id="order" class="form-inline">
+                  {% for item_order_form in formset %}
+                  <div id="item-{{ forloop.counter0 }}" class="form-group">
+                      <span class="mx-2">{{ item_order_form.produto }}</span>
+                      <span class="mx-2">{{ item_order_form.quantidade }}</span>
+                      <span class="mx-2">{{ item_order_form.preco }}</span>
+                  </div>
+                  {% endfor %}
+              </div>
+              <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
+
+              <div class="form-inline buttons">
+                  <button class="btn btn-primary pull-right" value="Save">
+                      <i class="fa fa-floppy-o"></i>
+                      Salvar
+                  </button>
+              </div>
+
+          </form>
+        </div>
+    </div>
 
 
     <!--<div class="container">-->
@@ -127,17 +125,12 @@
       });
     </script>
     
-    <!--<script type="text/html" id="item-order">-->
-      <!--<div id="item-__prefix__" class="form-group" style="margin-top: 10px">-->
-        <!--{{ formset.empty_form }}-->
-      <!--</div>-->
-	<!--</script>    -->
-
     <script type="text/html" id="item-order">
       <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
-          <tr>
-            <td>{{ formset.empty_form }}</td>
-          </tr>
+        {% for item in formset.empty_form %}
+        {{ item }}
+        {% endfor %}
       </div>
 	</script>
+
     {% endblock script %}

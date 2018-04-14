@@ -29,6 +29,17 @@ def produtos(request):
     return render(request, 'core/produtos.html', context)
 
 
+def venda(request, venda_pk):
+    pedido = Pedido.objects.get(pk=venda_pk)
+    itens = pedido.detalhepedido_set.values()
+    print('AQUI PRINTA ITENS\n', itens)
+    context = {
+        'pedido':pedido,
+        'itens':itens,
+    }
+    return render(request, 'core/venda.html', context)
+
+
 def pedidos(request):
     produtos = Produto.objects.all()
     pedidos = Pedido.objects.all()
@@ -91,9 +102,7 @@ def registro(request):
             return redirect('core:index')
         else:
             if form.errors:
-                print('deu erro')
-                print(dir(form.errors))
-            return render(request,'core/registro.html', context)
+                return render(request,'core/registro.html', context)
     else:
         form = UserCreationForm()
         context = {'form':form}
