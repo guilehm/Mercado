@@ -48,20 +48,21 @@
               {% csrf_token %}
               <div class="row">
                   <div class="col-xs-8 col-md-5">
-                      {{ forms }}
+                      <h3 class="lead">Cliente</h3>
+                      {{ forms.cliente }}
                       {{ formset.management_form }}
                   </div>
               </div>
-              <h3 class="lead">Produtos</h3>
-              <div id="order" class="form-inline">
-                  {% for item_order_form in formset %}
-                  <div id="item-{{ forloop.counter0 }}" class="form-group">
-                      <span class="mx-2">{{ item_order_form.produto }}</span>
-                      <span class="mx-2">{{ item_order_form.quantidade }}</span>
-                      <span class="mx-2">{{ item_order_form.preco }}</span>
+              <h3 class="lead mt-4">Produtos</h3>
+                  <div id="order" class="form-inline">
+                      {% for item_order_form in formset %}
+                      <div id="item-{{ forloop.counter0 }}" class="form-group" style="margin-top: 10px">
+                        {% for item in formset.empty_form %}
+                        <span class="mr-3">{{ item }}</span>
+                        {% endfor %}
+                      </div>
+                      {% endfor %}
                   </div>
-                  {% endfor %}
-              </div>
               <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
 
               <div class="form-inline buttons">
@@ -112,9 +113,7 @@
 				$("div#order").append(compiledTmpl);
 				// update form count
 				$('#id_produto-TOTAL_FORMS').attr('value', count + 1);
-				// some animate to scroll to view our new form    nao vi.. vc ja corrigiu? não... é na linha 66 o erro, naão é?
 				$('#id_produto-' + (count) + '-produto').select2();
-
 				$('html, body').animate({
 					scrollTop: $("#add-item").position().top - 200
 				}, 800);
@@ -128,7 +127,7 @@
     <script type="text/html" id="item-order">
       <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
         {% for item in formset.empty_form %}
-        {{ item }}
+        <span class="mr-3">{{ item }}</span>
         {% endfor %}
       </div>
 	</script>
