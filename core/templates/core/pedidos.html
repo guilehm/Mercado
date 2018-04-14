@@ -57,8 +57,10 @@
                   <div id="order" class="form-inline">
                       {% for item_order_form in formset %}
                       <div id="item-{{ forloop.counter0 }}" class="form-group" style="margin-top: 10px">
-                        {% for item in formset.empty_form %}
-                        <span class="mr-3">{{ item }}</span>
+                        {% for item in formset %}
+                        <span class="mr-3">{{ item.produto }}</span>
+                        <span class="mr-3">{{ item.quantidade }}</span>
+                        <span class="mr-3">{{ item.preco }}</span>
                         {% endfor %}
                       </div>
                       {% endfor %}

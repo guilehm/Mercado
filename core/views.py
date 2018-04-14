@@ -32,7 +32,6 @@ def produtos(request):
 def venda(request, venda_pk):
     pedido = Pedido.objects.get(pk=venda_pk)
     itens = pedido.detalhepedido_set.values()
-    print('AQUI PRINTA ITENS\n', itens)
     context = {
         'pedido':pedido,
         'itens':itens,
@@ -55,11 +54,10 @@ def pedidos(request):
         formset = item_pedido_formset(
             request.POST, request.FILES, instance=pedido_forms, prefix='produto'
         )
-
         if forms.is_valid() and formset.is_valid():
             forms = forms.save()
             formset.save()
-            return HttpResponseRedirect(resolve_url('core:pedidos', forms.pk))
+            return HttpResponseRedirect(resolve_url('core:venda', forms.pk))
 
     else:
         forms = PedidoForm(instance=pedido_forms, prefix='main')
