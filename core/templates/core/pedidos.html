@@ -16,31 +16,6 @@
       <p class="lead">Faça aqui o seu pedido.</p>
     </div>
 
-    <!--<div class="container">-->
-                      <!--{{ forms }}-->
-                      <!--{{ formset.management_form }}-->
-      <!--<table class="table table-hover">-->
-        <!--<thead>-->
-          <!--<tr>-->
-            <!--<th>Produto</th>-->
-            <!--<th>Preço</th>-->
-            <!--<th>Quantidade</th>-->
-          <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody id="order">-->
-          <!--{% for item_order_form in formset %}-->
-          <!--<tr>-->
-            <!--<td>{{ item_order_form.produto }}</td>-->
-            <!--<td>{{ item_order_form.quantidade }}</td>-->
-            <!--<td>{{ item_order_form.preco }}</td>-->
-          <!--</tr>-->
-          <!--{% endfor %}-->
-        <!--</tbody>-->
-      <!--</table>-->
-        <!--<a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>-->
-    <!--</div>-->
-
-
     <div class="container">
         <div class="row">
           <form action="" method="POST">
@@ -77,29 +52,6 @@
           </form>
         </div>
     </div>
-
-
-    <!--<div class="container">-->
-        <!--<div class="row" id="order1">-->
-            <!--<div class="col-12 col-md-6">-->
-                <!--<label for="id_product-0-product" class="col-sm-2 col-form-label pl-0">Produto: </label>-->
-                <!--<select class="form-control form-control-sm" id="id_product-0-product">-->
-                <!--{% for produto in produtos %}-->
-                    <!--<option>{{ produto }}</option>-->
-                <!--{% endfor %}-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-6 col-md-3">-->
-                <!--<label for="id_product-0-quantity" class="col-sm-2 col-form-label pl-0">Quantidade: </label>-->
-                <!--<input class=" form-control form-control-sm" id="id_product-0-quantity" min="1" name="id_product-0-quantity" type="number">-->
-            <!--</div>-->
-            <!--<div class="col-6 col-md-3 mb-5">-->
-                <!--<label for="id_product-0-price" class="col-sm-2 col-form-label pl-0">Preço: </label>-->
-                <!--<input class=" form-control form-control-sm" id="id_product-0-price" name="product-0-price" step="0.1" type="number" value="0" min="0.01">-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<a href="#" class="btn btn-sm btn-info mb-4" id="add-item1">Add item</a>-->
-    <!--</div>-->
 
 
 {% endblock %}
