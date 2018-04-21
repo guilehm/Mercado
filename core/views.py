@@ -31,10 +31,10 @@ def produtos(request):
 
 def venda(request, venda_pk):
     pedido = Pedido.objects.get(pk=venda_pk)
-    itens = pedido.detalhepedido_set.values()
+    detalhes = pedido.detalhepedido_set.all()
     context = {
-        'pedido':pedido,
-        'itens':itens,
+        'pedido': pedido,
+        'detalhes': detalhes,
     }
     return render(request, 'core/venda.html', context)
 

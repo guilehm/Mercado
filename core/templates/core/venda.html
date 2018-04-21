@@ -18,11 +18,11 @@
           </tr>
         </thead>
         <tbody>
-          {% for item in itens %}
+          {% for detalhe in detalhes %}
           <tr>
-            <td>{{ item }}</td>
-            <td>2</td>
-            <td>3</td>
+            <td>{{ detalhe.produto }}</td>
+            <td>{{ detalhe.preco }}</td>
+            <td>{{ detalhe.produto.descricao|slice:":60" }}...</td>
           </tr>
           {% endfor %}
         </tbody>
