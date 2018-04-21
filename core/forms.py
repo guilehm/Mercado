@@ -8,6 +8,9 @@ class PedidoForm(forms.ModelForm):
         model = Pedido
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(PedidoForm, self).__init__(*args, **kwargs)
+        self.fields['cliente'].widget.attrs['class'] = 'form-control form-control-sm'
 
 class DetalhePedidoForm(forms.ModelForm):
 
