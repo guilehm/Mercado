@@ -21,8 +21,8 @@
           {% for detalhe in detalhes %}
           <tr>
             <td>{{ detalhe.produto }}</td>
-            <td>{{ detalhe.preco }}</td>
-            <td>{{ detalhe.produto.descricao|slice:":60" }}...</td>
+            <td>R$ {{ detalhe.preco }}</td>
+            <td>{{ detalhe.produto.descricao|slice:":80" }}...</td>
           </tr>
           {% endfor %}
         </tbody>
