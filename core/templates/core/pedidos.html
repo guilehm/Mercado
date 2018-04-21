@@ -41,7 +41,7 @@
                       {% endfor %}
                   </div>
 
-              <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
+              <button class="btn btn-sm btn-info my-4" id="add-item">Add item</button>
 
               <div class="form-inline buttons">
                   <button class="btn btn-primary pull-right" value="Save">
@@ -51,10 +51,6 @@
               </div>
           </form>
         </div>
-    </div>
-
-    <div id="home-id" class="">
-        
     </div>
 
 {% endblock %}
@@ -84,8 +80,14 @@
 
     <script>
         $(document).ready(function() {
-           $("#home-id").addClass("form-control-sm");
+           $("#home-id").addClass("btn btn-success");
            console.log(document.getElementById('home-id'))
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+           console.log(document.getElementsByClassName('select2-selection'));
         });
     </script>
 
