@@ -38,6 +38,8 @@ def venda(request, venda_pk):
     }
     return render(request, 'core/venda.html', context)
 
+def js(request):
+    return render(request, 'core/js.html')
 
 def pedidos(request):
     produtos = Produto.objects.all()
