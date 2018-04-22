@@ -41,7 +41,7 @@
                       {% endfor %}
                   </div>
 
-              <a class="btn btn-sm btn-info my-4" id="add-item">Add item</a>
+              <button class="btn btn-sm btn-info my-4" id="add-item">Add item</button>
 
               <div class="form-inline buttons">
                   <button class="btn btn-primary pull-right" value="Save">
@@ -52,7 +52,6 @@
           </form>
         </div>
     </div>
-
 
 {% endblock %}
 
@@ -67,6 +66,7 @@
 				$("div#order").append(compiledTmpl);
 				// update form count
 				$('#id_produto-TOTAL_FORMS').attr('value', count + 1);
+				$('#id_produto-TOTAL_FORMS').attr('class', form-control-sm);
 				$('#id_produto-' + (count) + '-produto').select2();
 				$('html, body').animate({
 					scrollTop: $("#add-item").position().top - 200
@@ -75,9 +75,22 @@
         	});
 			// {}
 			$('select').select2();
-      });
+        });
     </script>
-    
+
+    <script>
+        $(document).ready(function() {
+           $("#home-id").addClass("btn btn-success");
+           console.log(document.getElementById('home-id'))
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+           console.log(document.getElementsByClassName('select2-selection'));
+        });
+    </script>
+
     <script type="text/html" id="item-order">
       <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
         {% for item in formset.empty_form %}

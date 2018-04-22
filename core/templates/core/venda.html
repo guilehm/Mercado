@@ -11,6 +11,11 @@
     <div class="container">
       <table class="table table-hover">
         <thead>
+          <tr align="center">
+            <th colspan="3">
+            Cliente: {{ pedido.cliente }}
+            </th>
+          </tr>
           <tr>
             <th>Produto</th>
             <th>Preço</th>
@@ -18,11 +23,11 @@
           </tr>
         </thead>
         <tbody>
-          {% for item in itens %}
+          {% for detalhe in detalhes %}
           <tr>
-            <td>{{ item }}</td>
-            <td>2</td>
-            <td>3</td>
+            <td>{{ detalhe.produto }}</td>
+            <td>R$ {{ detalhe.preco }}</td>
+            <td>{{ detalhe.produto.descricao|slice:":80" }}...</td>
           </tr>
           {% endfor %}
         </tbody>
