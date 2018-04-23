@@ -26,7 +26,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="quantidade">Quantidade</label>
               </div>
-              <input type="number" min="0" class="form-control" id="quantidade" disabled>
+              <input type="number" min="0" class="form-control" id="quantidade" disabled onchange="qtd()">
             </div>
           </div>
 
@@ -44,7 +44,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="preco">Preço total</label>
               </div>
-              <input type="text" class="form-control" id="preco_total">
+              <input type="text" class="form-control" id="preco_total" readonly>
             </div>
           </div>
 
@@ -77,6 +77,13 @@ function prod(product){
     })
     $('#quantidade').attr('disabled', false)
   }
+}
+
+// populate total price input
+function qtd () {
+  var quantidade = $('#quantidade').val()
+  var preco_unit = $('#preco').val()
+  $('#preco_total').val(quantidade * preco_unit)
 }
 </script>
 
