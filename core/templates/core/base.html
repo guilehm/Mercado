@@ -23,6 +23,7 @@
         <a class="p-2 text-dark" href="{% url 'core:index' %}">Home</a>
         <a class="p-2 text-dark" href="{% url 'core:produtos' %}">Produtos</a>
         <a class="p-2 text-dark" href="{% url 'core:pedidos' %}">Pedidos</a>
+        <a class="p-2 text-dark" href="{% url 'core:js' %}">JS</a>
       </nav>
       {% if user.is_authenticated %}
       <a class="btn btn-outline-danger" href="{% url 'core:logout' %}">Logout</a>
@@ -71,6 +72,7 @@
           </div>
         </div>
       </footer>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -82,6 +84,9 @@
 
     {% block select %}
     {% endblock select %}
+
+    {% block scripts %}
+    {% endblock scripts %}
   </body>
   {% endblock body %}
 </html>

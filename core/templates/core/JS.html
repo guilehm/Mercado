@@ -1,0 +1,154 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">JavaScript</h1>
+      <p class="lead">Para testar formulários com Ajax.</p>
+    </div>
+
+    <div class="container">
+
+        <div id="pai">
+          
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="produto">Produto</label>
+            </div>
+            <select class="custom-select" id="produto" onchange="prod(this)">
+              <option>Selecione aqui o produto</option>
+              {% for produto in produtos %}
+              <option>{{ produto }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="row">            
+            <div class="col-md-3">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="quantidade">Quantidade</label>
+                </div>
+                <input type="number" min="0" class="form-control" id="quantidade" disabled onchange="qtd()">
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="preco">Preço un.</label>
+                </div>
+                <input type="text" class="form-control" id="preco" readonly>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="preco_total">Preço total</label>
+                </div>
+                <input type="text" class="form-control" id="preco_total" readonly>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+        </div>
+        <button class="btn btn-sm btn-success" onclick="add()" id="add-botao">Adicionar Produtos</button>
+    </div>
+
+{% block scripts %}
+
+
+{% endblock scripts %}
+<script>  
+// request and populate price input
+function prod(product){
+  if ($('#produto').val() == 'Selecione aqui o produto'){
+    $('#quantidade').attr('disabled', true)
+    $('#preco').val('')
+    $('#preco_total').val('')
+    $('#quantidade').val('')
+  } else {
+    $.ajax({
+      type: 'GET',
+      url: 'http://localhost:8000/api/produtos/',
+      dataType: 'json',
+      async: 'true',
+      success: function (data) {
+        for (i=0; i < data.length; i++) {
+          if (data[i].produto == $('#produto').val()) {
+            console.log('é igual')
+            $('#preco').val(data[i].preco)
+          }
+        }
+      }
+    })
+    $('#quantidade').attr('disabled', false)
+  }
+}
+
+// populate total price input
+function qtd () {
+  var quantidade = $('#quantidade').val()
+  var preco_unit = $('#preco').val()
+  $('#preco_total').val(quantidade * preco_unit)
+}
+</script>
+
+<script>
+  function add() {
+    var count = $('#pai').children().length;
+    var form_produto = $('#form-produto').html();
+    var upd_form_produto = form_produto.replace(/__prefix__/g, count);
+    $('#pai').append(upd_form_produto)
+    console.log(count)
+  }
+</script>
+
+<script type="text/html" id="form-produto">
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="produto-__prefix__">Produto</label>
+      </div>
+      <select class="custom-select" id="produto-__prefix__" onchange="prod(this)">
+        <option>Selecione aqui o produto</option>
+        {% for produto in produtos %}
+        <option>{{ produto }}</option>
+        {% endfor %}
+      </select>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="quantidade-item-__prefix__">Quantidade</label>
+        </div>
+        <input type="number" min="0" class="form-control" id="quantidade-__prefix__" disabled onchange="qtd()">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="preco-__prefix__">Preço un.</label>
+        </div>
+        <input type="text" class="form-control" id="preco-__prefix__" readonly>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="preco_total-__prefix__">Preço total</label>
+        </div>
+        <input type="text" class="form-control" id="preco_total-__prefix__" readonly>
+      </div>
+    </div>
+
+  </div>
+  <hr>
+</script>
+
+{% endblock %}

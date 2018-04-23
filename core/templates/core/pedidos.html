@@ -17,7 +17,6 @@
     </div>
 
     <div class="container">
-        <div class="row">
           <form action="" method="POST">
               {% csrf_token %}
               <div class="row">
@@ -29,18 +28,17 @@
               </div>
 
               <h3 class="lead mt-4">Produtos</h3>
-                  <div id="order" class="form-inline">
-                      {% for item_order_form in formset %}
-                      <div id="item-{{ forloop.counter0 }}" class="form-group" style="margin-top: 10px">
-                        {% for item in formset %}
-                        <span class="mr-3">{{ item.produto }}</span>
-                        <span class="mr-3">{{ item.quantidade }}</span>
-                        <span class="mr-3">{{ item.preco }}</span>
-                        {% endfor %}
-                      </div>
-                      {% endfor %}
+              <div id="order" class="">
+                  {% for item_order_form in formset %}
+                  <div id="item-{{ forloop.counter0 }}" class="form-inline" style="">
+                    {% for item in formset %}
+                    <span class="">{{ item.produto }}</span>
+                    <span class="">{{ item.quantidade }}</span>
+                    <span class="">{{ item.preco }}</span>
+                    {% endfor %}
                   </div>
-
+                  {% endfor %}
+              </div>
               <button class="btn btn-sm btn-info my-4" id="add-item">Add item</button>
 
               <div class="form-inline buttons">
@@ -50,7 +48,6 @@
                   </button>
               </div>
           </form>
-        </div>
     </div>
 
 {% endblock %}
@@ -78,23 +75,10 @@
         });
     </script>
 
-    <script>
-        $(document).ready(function() {
-           $("#home-id").addClass("btn btn-success");
-           console.log(document.getElementById('home-id'))
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-           console.log(document.getElementsByClassName('select2-selection'));
-        });
-    </script>
-
-    <script type="text/html" id="item-order">
-      <div id="item-__prefix__" class="form-group" style="margin-top: 10px">
+        <script type="text/html" id="item-order">
+      <div id="item-__prefix__" class="form-inline p-0" style="margin-top: 10px">
         {% for item in formset.empty_form %}
-        <span class="mr-3">{{ item }}</span>
+        <span class="">{{ item }}</span>
         {% endfor %}
       </div>
 	</script>

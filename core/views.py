@@ -3,17 +3,21 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import resolve_url
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.forms.models import inlineformset_factory
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from .models import Produto
 from .models import Pedido
 from .models import DetalhePedido
 from .forms import PedidoForm
 from .forms import DetalhePedidoForm
+from .serializers import ProdutoSerializer
+
 
 
 # Create your views here.
@@ -38,6 +42,12 @@ def venda(request, venda_pk):
     }
     return render(request, 'core/venda.html', context)
 
+def js(request):
+    produtos = Produto.objects.all()
+    context = {
+        'produtos':produtos,
+    }
+    return render(request, 'core/js.html', context)
 
 def pedidos(request):
     produtos = Produto.objects.all()
@@ -105,3 +115,20 @@ def registro(request):
         form = UserCreationForm()
         context = {'form':form}
         return render(request, 'core/registro.html', context)
+
+
+# Views da API
+class ProdutosLista(APIView):
+    def get(self, request):
+        produtos = Produto  .objects.all()
+        context = {'request': request}
+        serializer = ProdutoSerializer(produtos, context=context, many=True)
+        return Response(serializer.data)
+
+
+class ProdutoLista(APIView):
+    def get(self, request, produto_id):
+        produto = Produto.objects.get(id=produto_id)
+        context = {'request': request}
+        serializer = ProdutoSerializer(produto, context=context)
+        return Response(serializer.data)
