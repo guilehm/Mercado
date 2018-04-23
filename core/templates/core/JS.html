@@ -6,4 +6,48 @@
       <h1 class="display-4">JavaScript</h1>
       <p class="lead">Para testar formulários com Ajax.</p>
     </div>
+
+    <div class="container">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Produto</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option>Selecione aqui o produto</option>
+            {% for produto in produtos %}
+            <option>{{ produto }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="quantidade">Quantidade</label>
+              </div>
+              <input type="number" min="0" value="1" class="form-control" id="quantidade">
+            </div>
+          </div>
+
+          <div class="col-4">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="preco">Preço un.</label>
+              </div>
+              <input type="text" class="form-control" id="preco">
+            </div>
+          </div>
+
+          <div class="col-5">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="preco">Preço total</label>
+              </div>
+              <input type="text" class="form-control" id="preco_total">
+            </div>
+          </div>
+
+        </div>
+    </div>
 {% endblock %}
