@@ -10,9 +10,9 @@
     <div class="container">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Produto</label>
+            <label class="input-group-text" for="produto">Produto</label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
+          <select class="custom-select" id="produto" onchange="prod(this)">
             <option>Selecione aqui o produto</option>
             {% for produto in produtos %}
             <option>{{ produto }}</option>
@@ -26,7 +26,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="quantidade">Quantidade</label>
               </div>
-              <input type="number" min="0" value="1" class="form-control" id="quantidade">
+              <input type="number" min="0" class="form-control" id="quantidade" disabled>
             </div>
           </div>
 
@@ -35,7 +35,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="preco">Preço un.</label>
               </div>
-              <input type="text" class="form-control" id="preco">
+              <input type="text" class="form-control" id="preco" readonly>
             </div>
           </div>
 
@@ -50,4 +50,34 @@
 
         </div>
     </div>
+
+{% block scripts %}
+
+
+{% endblock scripts %}
+<script>  
+// request and populate price input
+function prod(product){
+  if ($('#produto').val() == 'Selecione aqui o produto'){
+    $('#quantidade').attr('disabled', true)
+  } else {
+    $.ajax({
+      type: 'GET',
+      url: 'http://localhost:8000/api/produtos/',
+      dataType: 'json',
+      async: 'true',
+      success: function (data) {
+        for (i=0; i < data.length; i++) {
+          if (data[i].produto == $('#produto').val()) {
+            console.log('é igual')
+            $('#preco').val(data[i].preco)
+          }
+        }
+      }
+    })
+    $('#quantidade').attr('disabled', false)
+  }
+}
+</script>
+
 {% endblock %}
