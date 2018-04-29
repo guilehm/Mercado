@@ -92,7 +92,7 @@ function prod(product){
 function qtd () {
   var quantidade = $('#quantidade').val()
   var preco_unit = $('#preco').val()
-  $('#preco_total').val(quantidade * preco_unit)
+  $('#preco_total').val((quantidade * preco_unit).toFixed(2))
 }
 </script>
 
